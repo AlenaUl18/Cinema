@@ -1,8 +1,10 @@
 package com.example.startproject;
 
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,7 +47,18 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void onClick (View view){
-        Log.i(TAG,"Нажата кнопка Войти в профиль");
+        Intent intent = new Intent(this, MainActivity2.class);
+        intent.putExtra("строчка", "Аня");
+        startActivityForResult(intent, 1);;
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (data == null) {
+            return;
+        } String str = data.getStringExtra("строчка");
+        Toast.makeText(getApplicationContext(), str, Toast.LENGTH_LONG).show();
     }
 }
 
