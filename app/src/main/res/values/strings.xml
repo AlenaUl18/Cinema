@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Start project</string>
+    <string name="app_name">Cinema</string>
+    <string name="name">Кинотеатр "MyCinema"</string>
+    <string name="Text">РАСПИСАНИЕ</string>
+    <string name="Pole">ВЫБОР ЗАЛА</string>
+    <string name="on">Войти в профиль</string>
 </resources>
