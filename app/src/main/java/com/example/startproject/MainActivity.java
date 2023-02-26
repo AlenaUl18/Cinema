@@ -1,6 +1,10 @@
 package com.example.startproject;
 
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +20,17 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
+    ActivityResultLauncher<Intent> StartForResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if(result.getResultCode() == MainActivity2.RESULT_OK){
+                        Intent intent = result.getData();
+                        String str = intent.getStringExtra("строчка");
+                        Toast.makeText(getApplicationContext(), str, Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick (View view){
         Intent intent = new Intent(this, MainActivity2.class);
         intent.putExtra("строчка", "Аня");
-        startActivityForResult(intent, 1);;
+        StartForResult.launch(intent);
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -61,5 +76,7 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(getApplicationContext(), str, Toast.LENGTH_LONG).show();
     }
 }
+
+
 
 
